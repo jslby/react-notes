@@ -1,3 +1,5 @@
+$pageWidth: 600px;
+
 *{
   padding: 0;
   margin: 0;
@@ -5,12 +7,24 @@
   box-sizing: border-box;
 }
 
-.add-note{
-  width: 600px;
+#root{
+  width: $pageWidth;
   margin: 0 auto;
-  padding-top: 50px;
+}
+
+header{
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+footer{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.add-note{
   textarea{
-    padding: 20px;
+    padding: 10px;
     width: 100%;
     display: block;
     height: 300px;
@@ -19,7 +33,7 @@
   input[type=text]{
     height: 30px;
     width: 100%;
-    padding: 0 20px;
+    padding: 0 10px;
     line-height: 30px;
     margin-top: 20px;
   }
@@ -32,7 +46,5 @@
 }
 
 .show-note{
-  padding-top: 50px;
-  width: 600px;
-  margin: 0 auto;
+
 }

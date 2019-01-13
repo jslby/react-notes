@@ -9,12 +9,14 @@ export default class ShowNote extends Component {
 
     this.state = {
       isDecrypt: false,
+      isLoad: false,
       noteEncrypted: '',
       noteDecrypted: '',
     };
 
     this.dbCon.on('value', snapshot => {
       this.setState({
+        isLoad: true,
         noteEncrypted: snapshot.val().text
       });
     });
@@ -28,7 +30,6 @@ export default class ShowNote extends Component {
         .toString(CryptoJS.enc.Utf8);
 
     if(noteEncrypted != ''){
-      console.log(noteEncrypted);
       this.setState({
         noteDecrypted: noteEncrypted,
         isDecrypt: true,
@@ -39,12 +40,23 @@ export default class ShowNote extends Component {
 
   render(){
     if(this.state.isDecrypt){
-      return <div className='show-note'>{this.state.noteDecrypted}</div>
+      return(
+        <div className='show-note'>
+          {this.state.noteDecrypted}
+        </div>
+      )
     }else{
       return(
         <div className='show-pass'>
-          <input type='text' ref={i => this.pass = i} placeholder='password for decrypt'/>
-          <button onClick={this.handleDecrypt}>Decrypt note</button>
+          <input 
+            type='text' 
+            ref={i => this.pass = i} 
+            placeholder='password for decrypt'/>
+          <button 
+            disabled={!this.state.isLoad} 
+            onClick={this.handleDecrypt}>
+              {this.state.isLoad ? 'Decrypt note' : 'Loading note'}
+          </button>
         </div>
       )
     }
