@@ -24,11 +24,14 @@ header{
   h1{
     text-align: center;
     a{
+      color: $color5;
+
       text-decoration: none;
     }
   }
   .open-modal{
     display: table;
+    color: $color5;
     padding-top: 15px;
     margin: 0 auto;
   }
