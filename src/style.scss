@@ -47,6 +47,50 @@ footer{
   }
 }
 
+.url-note{
+  h2{
+    color: $color2;
+    padding-bottom: 5px;
+  }
+  p{
+    color: $color3;
+    padding-bottom: 30px;
+  }
+  .url-outer{
+    position: relative;
+    input{
+      height: 50px;
+      box-sizing: border-box;
+      cursor: default;
+      border: none;
+      font-size: 22px;
+      border-bottom: 1px solid $color3;
+      width: 100%;
+      line-height: 30px;
+    }
+    button{
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      text-transform: uppercase;
+      font-size: 13px;
+      align-items: center;
+      background: transparent;
+      cursor: pointer;
+      color: $color1;
+      border: none;
+      transition: all .5s;
+      &.copied{
+        color: $color5;
+        cursor: default;
+      }
+
+    }
+  }
+}
+
 .about-modal{
   padding: 20px;
   font-size: 16px;
@@ -100,12 +144,12 @@ footer{
       position: absolute;
       cursor: pointer;
       right: 0;
-      font-size: 10px;
+      font-size: 13px;
       bottom: 0;
       top: 0;
       display: flex;
       align-items: center;
-      line-height: 10px;
+      line-height: 13px;
     }
     input.add-password{
       height: 30px;
@@ -141,7 +185,9 @@ footer{
 }
 
 .show-note{
-
+  img{
+    max-width: 100%;
+  }
 }
 
 .show-pass{

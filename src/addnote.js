@@ -17,17 +17,34 @@ export default class AddNote extends Component{
     super(props);
 
     this.dbCon = this.props.db.database().ref();
+    this.domain = `${window.location.protocol}//${window.location.hostname}`;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePressEnter = this.handlePressEnter.bind(this);
     this.handleTogglePassword = this.handleTogglePassword .bind(this);
+    this.copyToClipboard = this.copyToClipboard.bind(this);
 
     
 
     this.state = {
       editorState: EditorState.createEmpty(),
+      buttonDisable: true,
       isPasswordType: true,
+      isDone: false,
+      urlNote: '',
+      isCopied: false,
     };
+  }
+
+  copyToClipboard(e){
+    e.preventDefault();
+    this.setState({
+      isCopied: true,
+    });
+    this._url.focus();
+    document.execCommand("selectAll");
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
   }
 
   onEditorStateChange = (editorState) => {
@@ -49,7 +66,11 @@ export default class AddNote extends Component{
     let noteId = this.dbCon.push({
       text: CryptoJS.AES.encrypt(text, pass).toString(),
     }).then(res => {
-      this.props.history.push(`/n/${res.key}`)
+      this.setState({
+        isDone: true,
+        urlNote: res.key,
+      })
+      //this.props.history.push(`/n/${res.key}`)
     })
   }
 
@@ -60,54 +81,80 @@ export default class AddNote extends Component{
   }
 
   render(){
-    return(
-      <div className='add-note'>
-        <Editor
-          placeholder='just enter your text...'
-          editorState={this.state.editorState}
-          onEditorStateChange={this.onEditorStateChange}
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
-          toolbar={{
-            options: [
-              'inline', 
-              'blockType', 
-              'list', 
-              'textAlign', 
-              'link', 
-              'image'
-            ],
-            inline: {
-              options: ['bold', 'italic', 'underline', 'strikethrough'],
-            },
-            blockType: {
-              inDropdown: true,
-              options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code'],
-            },
-            list: {
-              inDropdown: false,
-              options: ['unordered', 'ordered'],
-            },
-            textAlign: {
-              inDropdown: false,
-              options: ['left', 'center'],
-            },
-          }}
-        />  
-        <div className='password-outer'>
-          <input 
-            className='add-password'
-            onKeyPress={this.handlePressEnter} 
-            ref={(i) => this._pass = i} 
-            type={this.state.isPasswordType ? 'password' : 'text'}
-            placeholder='...and enter password'/>
-          <span onClick={this.handleTogglePassword}>
-            {this.state.isPasswordType ? 'show' : 'hide'}
-          </span>
+    if(this.state.isDone){
+      return (
+        <div className='url-note'>
+          <h2>Copy this link and share with friends</h2>
+          <p>Only those who have a password can open the content</p>
+          <div className='url-outer'>
+            <input 
+              type='text' 
+              readOnly={true}
+              ref={(i) => this._url = i}
+              value={`${this.domain}/n/${this.state.urlNote}`}/>
+             <button 
+              disabled={this.state.isCopied}
+              className={this.state.isCopied ? 'copied' : ''}
+              onClick={this.copyToClipboard}>
+              {!this.state.isCopied ? 'Copy to clipboard' : 'Copied'}
+            </button> 
+          </div>
         </div>
-        <button className='add-button' onClick={this.handleSubmit}>Encrypt</button>
-      </div>
-    )
+      )
+    }else{
+      return(
+        <div className='add-note'>
+          <Editor
+            placeholder='just enter your text...'
+            editorState={this.state.editorState}
+            onEditorStateChange={this.onEditorStateChange}
+            toolbarClassName="toolbarClassName"
+            wrapperClassName="wrapperClassName"
+            editorClassName="editorClassName"
+            toolbar={{
+              options: [
+                'inline', 
+                'blockType', 
+                'list', 
+                'textAlign', 
+                'link', 
+                'image'
+              ],
+              inline: {
+                options: ['bold', 'italic', 'underline', 'strikethrough'],
+              },
+              blockType: {
+                inDropdown: true,
+                options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code'],
+              },
+              list: {
+                inDropdown: false,
+                options: ['unordered', 'ordered'],
+              },
+              textAlign: {
+                inDropdown: false,
+                options: ['left', 'center'],
+              },
+            }}
+          />  
+          <div className='password-outer'>
+            <input 
+              className='add-password'
+              onKeyPress={this.handlePressEnter} 
+              ref={(i) => this._pass = i} 
+              type={this.state.isPasswordType ? 'password' : 'text'}
+              placeholder='...and enter password'/>
+            <span onClick={this.handleTogglePassword}>
+              {this.state.isPasswordType ? 'show' : 'hide'}
+            </span>
+          </div>
+          <button 
+            className='add-button'
+            onClick={this.handleSubmit}>
+            Encrypt
+          </button>
+        </div>
+      )
+    }
   }
 }
