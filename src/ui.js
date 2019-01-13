@@ -1,9 +1,16 @@
 import React from 'react';
 
 export const Header = () => 
-  <header>Header</header>
+  <header>
+    <h1>#qrnote</h1>
+  </header>
 
 
 export const Footer = () => 
-  <footer>Footer</footer>
+  <footer>
+    <ul>
+      <li><a href='#'>Index</a></li>
+      <li><a href='#'>About</a></li>
+    </ul>
+  </footer>
 

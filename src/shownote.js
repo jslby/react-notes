@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import CryptoJS from 'crypto-js';
+import renderHTML from 'react-render-html';
 
 export default class ShowNote extends Component {
   constructor(props){
@@ -13,7 +14,9 @@ export default class ShowNote extends Component {
       noteEncrypted: '',
       noteDecrypted: '',
     };
+  }
 
+  componentWillMount(){
     this.dbCon.on('value', snapshot => {
       this.setState({
         isLoad: true,
@@ -42,7 +45,7 @@ export default class ShowNote extends Component {
     if(this.state.isDecrypt){
       return(
         <div className='show-note'>
-          {this.state.noteDecrypted}
+          {renderHTML(this.state.noteDecrypted)}
         </div>
       )
     }else{
