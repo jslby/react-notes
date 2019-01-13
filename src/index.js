@@ -5,7 +5,7 @@ import {HashRouter as Router, Route} from 'react-router-dom'
 
 import AddNote from './addnote'
 import ShowNote from './shownote'
-import {Header, Footer} from './ui.js';
+import {Header, Footer} from './ui';
 
 import './style.scss'
 

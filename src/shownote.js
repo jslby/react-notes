@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CryptoJS from 'crypto-js';
 import renderHTML from 'react-render-html';
+import parse from 'html-react-parser';
 
 export default class ShowNote extends Component {
   constructor(props){
@@ -45,20 +46,22 @@ export default class ShowNote extends Component {
     if(this.state.isDecrypt){
       return(
         <div className='show-note'>
-          {renderHTML(this.state.noteDecrypted)}
+          {parse(this.state.noteDecrypted)}
         </div>
       )
     }else{
       return(
         <div className='show-pass'>
           <input 
+            className='add-password'
             type='text' 
             ref={i => this.pass = i} 
-            placeholder='password for decrypt'/>
+            placeholder='enter password for decrypt'/>
           <button 
+            className={!this.state.isLoad ? 'loading' : ''}
             disabled={!this.state.isLoad} 
             onClick={this.handleDecrypt}>
-              {this.state.isLoad ? 'Decrypt note' : 'Loading note'}
+              {this.state.isLoad ? 'Decrypt qoop' : 'Loading qoop'}
           </button>
         </div>
       )

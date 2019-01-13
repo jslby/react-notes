@@ -11,56 +11,119 @@ $pageWidth: 600px;
   padding: 0;
   margin: 0;
   outline: none;
-  box-sizing: border-box;
 }
 
 #root{
-  width: $pageWidth;
+  width: 70%;
   margin: 0 auto;
 }
 
 header{
   padding-top: 30px;
-  padding-bottom: 15px;
+  padding-bottom: 60px;
+  h1{
+    text-align: center;
+    a{
+      text-decoration: none;
+    }
+  }
+  .open-modal{
+    display: table;
+    padding-top: 15px;
+    margin: 0 auto;
+  }
 }
 
 footer{
-  padding-top: 15px;
+  padding-top: 40px;
   padding-bottom: 15px;
+  font-size: 13px;
+  text-align: center;
+  p{
+    padding-bottom: 5px;
+  }
 }
 
-.mde-header{
-  .mde-tabs{
-    button{
-      padding: 5px;
+.about-modal{
+  padding: 20px;
+  font-size: 16px;
+
+  h2{
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  p{
+    padding-bottom: 15px;
+  }
+  ul{
+    list-style-position: inside;
+    li{
+      padding-bottom: 5px;
+    }
+    padding-bottom: 15px;
+  }
+}
+
+.rdw-editor-toolbar{
+  .rdw-dropdown-optionwrapper{
+    opacity: 1;
+    &:hover{
+      box-shadow: none;
+    }
+  }
+  border: none;
+  border-bottom: 1px solid $color3;
+  .rdw-option-wrapper,
+  .rdw-dropdown-wrapper{
+    border: none;
+    transition: all .3s;
+    cursor: pointer;
+    &:hover{
+      box-shadow: none;
+      opacity: 1;
     }
   }
 }
 
-.mde-preview{
-  img{
-    max-width: 100%;
-    height: auto;
-  }
+.rdw-option-active{
+  background: $color3;
 }
 
 .add-note{
-  textarea.add-textarea{
-    padding: 10px;
-    width: 100%;
-    display: block;
-    height: 300px;
-    resize: vertical;
-    border: 1px solid $color5;
+  .password-outer{
+    position: relative;
+    margin-top: 50px;
+    span{
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      font-size: 10px;
+      bottom: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      line-height: 10px;
+    }
+    input.add-password{
+      height: 30px;
+      box-sizing: border-box;
+      border: none;
+      font-size: 16px;
+      border-bottom: 1px solid $color3;
+      width: 100%;
+      line-height: 30px;
+      &::placeholder{
+        color: #9197a3;
+        
+      }
+      &:focus{
+        &::placeholder{
+          color: #bdc1c9;
+        }
+      }
+    }
   }
-  input.add-password{
-    height: 50px;
-    border: 1px solid $color5;
-    width: 100%;
-    padding: 0 10px;
-    line-height: 30px;
-    margin-top: 20px;
-  }
+  
   button.add-button{
     width: 100%;
     height: 70px;
@@ -68,7 +131,7 @@ footer{
     cursor: pointer;
     text-align: center;
     margin-top: 20px;
-    background: $color1;
+    background: $color4;
     border: none;
     color: #fff;
   }
@@ -76,4 +139,39 @@ footer{
 
 .show-note{
 
+}
+
+.show-pass{
+  button{
+    width: 100%;
+    height: 70px;
+    font-size: 22px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+    background: $color4;
+    border: none;
+    color: #fff;
+    &.loading{
+      background: $color2;
+    }
+  }
+  input.add-password{
+    height: 30px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 16px;
+    border-bottom: 1px solid $color3;
+    width: 100%;
+    line-height: 30px;
+    &::placeholder{
+      color: #9197a3;
+      
+    }
+    &:focus{
+      &::placeholder{
+        color: #bdc1c9;
+      }
+    }
+  }
 }
