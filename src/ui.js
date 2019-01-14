@@ -20,8 +20,16 @@ export class Header extends Component{
   render(){
     return(
       <header>
-        <h1><a href='/'>qoop.cc</a></h1>
-        <a className='open-modal' href='#' onClick={this.onOpenModal}>#about</a>
+        <h1><a href='/'>
+          <span className='let-1'>q</span>
+          <span className='let-2'>O</span>
+          <span className='let-3'>O</span>
+          <span className='let-4'>p</span>
+          <span className='let-5'>.</span>
+          <span className='let-6'>c</span>
+          <span className='let-7'>c</span>
+        </a></h1>
+        <a className='open-modal' href='#' onClick={this.onOpenModal}>#about_project</a>
         <Modal open={this.state.openModal} onClose={this.onCloseModal} center>
           <About/>
         </Modal>

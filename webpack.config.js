@@ -1,5 +1,6 @@
 const path = require('path');
 const HWP = require('html-webpack-plugin');
+const JavaScriptObfuscator = require('webpack-obfuscator');
 
 module.exports = {
   entry: path.join(__dirname, '/src/index.js'),

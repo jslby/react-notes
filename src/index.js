@@ -1,13 +1,20 @@
-import React from 'react'
-import Firebase from './firebase'
-import {render} from 'react-dom'
-import {HashRouter as Router, Route} from 'react-router-dom'
+import React from 'react';
+import Firebase from './firebase';
+import {render} from 'react-dom';
+import {HashRouter as Router, Route} from 'react-router-dom';
 
-import AddNote from './addnote'
-import ShowNote from './shownote'
+import AddNote from './addnote';
+import ShowNote from './shownote';
 import {Header, Footer} from './ui';
 
-import './style.scss'
+import WebFont from 'webfontloader';
+import './style.scss';
+
+WebFont.load({
+   google: {
+     families: ['Roboto:100,200,300,400,700', 'sans-serif']
+   }
+});
 
 render(
   <Router>

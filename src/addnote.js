@@ -8,10 +8,6 @@ import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-import fontawesome from '@fortawesome/fontawesome-free';
-import solid from '@fortawesome/fontawesome-free-solid';
-
-
 export default class AddNote extends Component{
   constructor(props){
     super(props);
@@ -91,7 +87,7 @@ export default class AddNote extends Component{
               type='text' 
               readOnly={true}
               ref={(i) => this._url = i}
-              value={`${this.domain}/n/${this.state.urlNote}`}/>
+              value={`${this.domain}/#/n/${this.state.urlNote}`}/>
              <button 
               disabled={this.state.isCopied}
               className={this.state.isCopied ? 'copied' : ''}

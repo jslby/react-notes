@@ -25,12 +25,15 @@
     "draftjs-to-html": "^0.8.4",
     "firebase": "^5.7.3",
     "html-react-parser": "^0.6.1",
+    "immutable": "^4.0.0-rc.12",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-draft-wysiwyg": "^1.12.20",
     "react-render-html": "^0.6.0",
     "react-responsive-modal": "^3.5.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "typeface-roboto": "0.0.54",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -46,6 +49,7 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.1.10",
+    "webpack-obfuscator": "^0.18.0"
   }
 }
