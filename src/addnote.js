@@ -20,26 +20,27 @@ export default class AddNote extends Component{
     this.handleTogglePassword = this.handleTogglePassword .bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
 
-    
-
     this.state = {
       editorState: EditorState.createEmpty(),
-      buttonDisable: true,
+
       isPasswordType: true,
       isDone: false,
-      urlNote: '',
       isCopied: false,
+      buttonDisable: true,
+
+      urlNote: '',
     };
   }
 
   copyToClipboard(e){
     e.preventDefault();
+
     this.setState({
       isCopied: true,
     });
     this._url.focus();
-    document.execCommand("selectAll");
-    document.execCommand("copy");
+    document.execCommand('selectAll');
+    document.execCommand('copy');
     window.getSelection().removeAllRanges();
   }
 
@@ -57,6 +58,7 @@ export default class AddNote extends Component{
 
   handleSubmit(e){
     e.preventDefault();
+    
     let text = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()));
     let pass = this._pass.value;
     let noteId = this.dbCon.push({
@@ -66,7 +68,6 @@ export default class AddNote extends Component{
         isDone: true,
         urlNote: res.key,
       })
-      //this.props.history.push(`/n/${res.key}`)
     })
   }
 

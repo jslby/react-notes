@@ -1,6 +1,7 @@
 const path = require('path');
 const HWP = require('html-webpack-plugin');
 const JavaScriptObfuscator = require('webpack-obfuscator');
+const CnameWebpackPlugin = require('cname-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, '/src/index.js'),
@@ -38,6 +39,9 @@ module.exports = {
   plugins:[
     new HWP(
       {template: path.join(__dirname, '/src/index.html')}
-    )
+    ),
+    new CnameWebpackPlugin({
+      domain: 'qoop.cc',
+    })
   ]
 }

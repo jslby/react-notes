@@ -8,12 +8,15 @@ export default class ShowNote extends Component {
     super(props)
     this.dbCon = this.props.db.database().ref(this.props.match.params.id);
     this.handleDecrypt = this.handleDecrypt.bind(this);
+    this.handleTogglePassword = this.handleTogglePassword .bind(this);
+    this.handlePressEnter = this.handlePressEnter.bind(this);
 
     this.state = {
       isDecrypt: false,
       isLoad: false,
       noteEncrypted: '',
       noteDecrypted: '',
+      isPasswordType: true,
     };
   }
 
@@ -25,9 +28,23 @@ export default class ShowNote extends Component {
       });
     });
   }
+  
+  handleTogglePassword(){
+    this.setState({
+      isPasswordType: !this.state.isPasswordType
+    });
+  }
+
+  handlePressEnter(e){
+    console.log(1);
+    if(e.key === 'Enter'){
+      this.handleDecrypt(e);
+    }
+  }
 
   handleDecrypt(e){
     e.preventDefault();
+
     let noteEncrypted = CryptoJS
         .AES
         .decrypt(this.state.noteEncrypted, this.pass.value)
@@ -52,16 +69,23 @@ export default class ShowNote extends Component {
     }else{
       return(
         <div className='show-pass'>
-          <input 
-            className='add-password'
-            type='text' 
-            ref={i => this.pass = i} 
-            placeholder='enter password for decrypt'/>
+          <div className='password-outer'>
+            <input 
+              className='add-password'
+              onKeyPress={this.handlePressEnter}
+              type={this.state.isPasswordType ? 'password' : 'text'}
+              ref={i => this.pass = i} 
+              placeholder='enter password for decrypt'/>
+            <span onClick={this.handleTogglePassword}>
+              {this.state.isPasswordType ? 'show' : 'hide'}
+            </span>
+          </div>
+          
           <button 
             className={!this.state.isLoad ? 'loading' : ''}
             disabled={!this.state.isLoad} 
             onClick={this.handleDecrypt}>
-              {this.state.isLoad ? 'Decrypt qoop' : 'Loading qoop'}
+              {this.state.isLoad ? 'Decrypt' : 'Loading...'}
           </button>
         </div>
       )
